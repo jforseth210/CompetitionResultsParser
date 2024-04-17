@@ -65,7 +65,7 @@ def load_institutions(filename):
 
         for line in reader:
             # Check if the institution already exists
-            institution = institutions.get(line[0], None)
+            institution = institutions.get(line[0].lower().strip(), None)
             if institution is None:
                 # Institution doesn't exist, create a new one
                 institution = Institution(
@@ -78,7 +78,7 @@ def load_institutions(filename):
                     state=line[3],
                     country=line[4]
                 )
-                institutions[line[0]] = institution
+                institutions[line[0].lower().strip()] = institution
         return institutions
 
 
@@ -101,7 +101,7 @@ def load_teams(filename, institutions):
                 advisor=line[5],
                 problem=line[6],
                 ranking=line[7],
-                institution_id=institutions.get(line[0]).id
+                institution_id=institutions.get(line[0].lower().strip()).id
             ))
         return teams
 
